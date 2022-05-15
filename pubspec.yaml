@@ -12,6 +12,7 @@ dependencies:
   freezed_annotation: ^2.0.3
   flutter_hooks: ^0.18.0
   hooks_riverpod: ^2.0.0-dev.7
+  audioplayers: ^0.20.1
 
 dev_dependencies:
   flutter_test:
