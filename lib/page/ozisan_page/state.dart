@@ -1,8 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:question_ozisan/api/audio_player_api.dart';
+import 'package:question_ozisan/main.dart';
 import 'package:question_ozisan/model/answer.dart';
 import 'package:question_ozisan/model/question.dart';
+import 'package:question_ozisan/page/util/custom_snack_bar.dart';
 import 'package:question_ozisan/util/constant_assets.dart';
 import 'package:question_ozisan/util/constant_questions.dart';
 
@@ -10,7 +13,10 @@ part 'state.freezed.dart';
 
 final ozisanPageStateProvider =
     StateNotifierProvider<OzisanPageNotifier, OzisanPageState>(
-  (ref) => OzisanPageNotifier._(ref.watch(audioPlayerApiProvider)),
+  (ref) => OzisanPageNotifier._(
+    ref.watch(audioPlayerApiProvider),
+    ref.watch(navigatorKeyProvider),
+  ),
 );
 
 enum AnimationType {
@@ -29,21 +35,47 @@ class OzisanPageState with _$OzisanPageState {
 }
 
 class OzisanPageNotifier extends StateNotifier<OzisanPageState> {
-  OzisanPageNotifier._(this._audioPlayerApi) : super(const OzisanPageState());
+  OzisanPageNotifier._(
+    this._audioPlayerApi,
+    this._navigatorKey,
+  ) : super(const OzisanPageState());
 
   final AudioPlayerApi _audioPlayerApi;
+  final GlobalKey<NavigatorState> _navigatorKey;
 
-  void onSelectedAnswer({required Answer answer}) {
-    state = state.copyWith(ozisanType: answer.ozisanType);
-    switch (answer.ozisanType) {
+  Future<void> onSelectedAnswer({required Answer answer}) async {
+    final ozisanType = answer.ozisanType;
+    state = state.copyWith(ozisanType: ozisanType);
+    _changeAnimationType(ozisanType: ozisanType);
+    await _playSound(ozisanType: ozisanType);
+  }
+
+  void _changeAnimationType({required OzisanType ozisanType}) {
+    switch (ozisanType) {
       case OzisanType.slim:
         state = state.copyWith(animationType: AnimationType.slim);
-        _audioPlayerApi.play(fileName: soundSlim);
         break;
       case OzisanType.fat:
         state = state.copyWith(animationType: AnimationType.fat);
-        _audioPlayerApi.play(fileName: soundFat);
         break;
+    }
+  }
+
+  Future<void> _playSound({required OzisanType ozisanType}) async {
+    try {
+      switch (ozisanType) {
+        case OzisanType.slim:
+          _audioPlayerApi.play(fileName: soundSlim);
+          break;
+        case OzisanType.fat:
+          _audioPlayerApi.play(fileName: soundFat);
+          break;
+      }
+    } on Exception catch (e) {
+      showCustomSnackBar(
+        context: _navigatorKey.currentContext!,
+        msg: '音声の再生に失敗しました。\nError: ${e.toString()}',
+      );
     }
   }
 
