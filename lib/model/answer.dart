@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:question_ozisan/util/constant_assets.dart';
 
 part 'answer.freezed.dart';
 
@@ -20,9 +21,9 @@ enum OzisanType {
   String get asset {
     switch (this) {
       case OzisanType.slim:
-        return 'assets/slim.PNG';
+        return imageSlim;
       case OzisanType.fat:
-        return 'assets/fat.PNG';
+        return imageFat;
     }
   }
 }
