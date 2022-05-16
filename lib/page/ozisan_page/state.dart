@@ -65,9 +65,11 @@ class OzisanPageNotifier extends StateNotifier<OzisanPageState> {
     try {
       switch (ozisanType) {
         case OzisanType.slim:
+          // ignore: unawaited_futures
           _audioPlayerApi.play(fileName: soundSlim);
           break;
         case OzisanType.fat:
+          // ignore: unawaited_futures
           _audioPlayerApi.play(fileName: soundFat);
           break;
       }
