@@ -10,12 +10,18 @@ class OzisanBody extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SafeArea(
-      child: Column(
-        children: const [
-          OzisanTitleSection(),
-          OzisanImageSection(),
-          OzisanQuestionSection(),
-        ],
+      child: Center(
+        child: Column(
+          children: const [
+            OzisanTitleSection(),
+            Expanded(child: OzisanImageSection()),
+            Divider(
+              thickness: 1,
+              height: 1,
+            ),
+            OzisanQuestionSection(),
+          ],
+        ),
       ),
     );
   }

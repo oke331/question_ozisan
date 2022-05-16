@@ -21,9 +21,9 @@ enum OzisanType {
   String get asset {
     switch (this) {
       case OzisanType.slim:
-        return Assets.image.slim.path;
+        return Assets.images.slim.path;
       case OzisanType.fat:
-        return Assets.image.fat.path;
+        return Assets.images.fat.path;
     }
   }
 }

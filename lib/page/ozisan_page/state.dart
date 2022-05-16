@@ -5,6 +5,7 @@ import 'package:question_ozisan/gen/assets.gen.dart';
 import 'package:question_ozisan/model/answer.dart';
 import 'package:question_ozisan/model/question.dart';
 import 'package:question_ozisan/util/constant_questions.dart';
+import 'package:question_ozisan/util/extensions.dart';
 
 part 'state.freezed.dart';
 
@@ -59,11 +60,11 @@ class OzisanPageNotifier extends StateNotifier<OzisanPageState> {
       switch (ozisanType) {
         case OzisanType.slim:
           // ignore: unawaited_futures
-          _audioPlayerApi.play(fileName: Assets.sound.slimSe);
+          _audioPlayerApi.play(fileName: Assets.sounds.slimSe.withoutAssets);
           break;
         case OzisanType.fat:
           // ignore: unawaited_futures
-          _audioPlayerApi.play(fileName: Assets.sound.fatSe);
+          _audioPlayerApi.play(fileName: Assets.sounds.fatSe.withoutAssets);
           break;
       }
     } on Exception catch (e) {

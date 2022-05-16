@@ -7,31 +7,31 @@
 
 import 'package:flutter/widgets.dart';
 
-class $AssetImageGen {
-  const $AssetImageGen();
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
 
-  /// File path: asset/image/fat.PNG
-  AssetGenImage get fat => const AssetGenImage('asset/image/fat.PNG');
+  /// File path: assets/images/fat.PNG
+  AssetGenImage get fat => const AssetGenImage('assets/images/fat.PNG');
 
-  /// File path: asset/image/slim.PNG
-  AssetGenImage get slim => const AssetGenImage('asset/image/slim.PNG');
+  /// File path: assets/images/slim.PNG
+  AssetGenImage get slim => const AssetGenImage('assets/images/slim.PNG');
 }
 
-class $AssetSoundGen {
-  const $AssetSoundGen();
+class $AssetsSoundsGen {
+  const $AssetsSoundsGen();
 
-  /// File path: asset/sound/fat_se.mp3
-  String get fatSe => 'asset/sound/fat_se.mp3';
+  /// File path: assets/sounds/fat_se.mp3
+  String get fatSe => 'assets/sounds/fat_se.mp3';
 
-  /// File path: asset/sound/slim_se.mp3
-  String get slimSe => 'asset/sound/slim_se.mp3';
+  /// File path: assets/sounds/slim_se.mp3
+  String get slimSe => 'assets/sounds/slim_se.mp3';
 }
 
 class Assets {
   Assets._();
 
-  static const $AssetImageGen image = $AssetImageGen();
-  static const $AssetSoundGen sound = $AssetSoundGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsSoundsGen sounds = $AssetsSoundsGen();
 }
 
 class AssetGenImage extends AssetImage {

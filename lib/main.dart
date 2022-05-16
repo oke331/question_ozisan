@@ -18,6 +18,7 @@ class MyApp extends HookConsumerWidget {
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        useMaterial3: true,
       ),
       home: const OzisanPage(),
       builder: (context, child) {

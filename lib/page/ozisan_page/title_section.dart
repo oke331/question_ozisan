@@ -9,10 +9,9 @@ class OzisanTitleSection extends HookConsumerWidget {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Text(
-        '30歳が近くなるにつれお腹を気にしはじめ、\n'
-        '気づいたらこんなアプリを作ってしまいました。',
-        style: Theme.of(context).textTheme.headline6,
+        '息子に褒められたいんじゃもん！！',
         textAlign: TextAlign.center,
+        style: Theme.of(context).textTheme.bodyLarge,
       ),
     );
   }
