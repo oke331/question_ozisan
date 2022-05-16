@@ -15,7 +15,7 @@ final ozisanPageStateProvider =
 );
 
 enum AnimationType {
-  none,
+  stop,
   slim,
   fat,
 }
@@ -25,7 +25,7 @@ class OzisanPageState with _$OzisanPageState {
   const factory OzisanPageState({
     @Default(dinnerQuestion) Question question,
     @Default(OzisanType.slim) OzisanType ozisanType,
-    @Default(AnimationType.none) AnimationType animationType,
+    @Default(AnimationType.stop) AnimationType animationType,
     @Default('') errorMessage,
   }) = _OzisanPageState;
 }
@@ -41,6 +41,7 @@ class OzisanPageNotifier extends StateNotifier<OzisanPageState> {
     final ozisanType = answer.ozisanType;
     state = state.copyWith(ozisanType: ozisanType);
     _changeAnimationType(ozisanType: ozisanType);
+    _changeQuestion();
     await _playSound(ozisanType: ozisanType);
   }
 
@@ -59,24 +60,21 @@ class OzisanPageNotifier extends StateNotifier<OzisanPageState> {
     try {
       switch (ozisanType) {
         case OzisanType.slim:
-          // ignore: unawaited_futures
-          _audioPlayerApi.play(fileName: Assets.sounds.slimSe.withoutAssets);
+          await _audioPlayerApi.play(
+            fileName: Assets.sounds.slimSe.withoutAssets,
+          );
           break;
         case OzisanType.fat:
-          // ignore: unawaited_futures
-          _audioPlayerApi.play(fileName: Assets.sounds.fatSe.withoutAssets);
+          await _audioPlayerApi.play(
+            fileName: Assets.sounds.fatSe.withoutAssets,
+          );
           break;
       }
-    } on Exception catch (e) {
+    } catch (e) {
       state = state.copyWith(
         errorMessage: '音声の再生に失敗しました。\nError: ${e.toString()}',
       );
     }
-  }
-
-  void onFinishedAnimation() {
-    state = state.copyWith(animationType: AnimationType.none);
-    _changeQuestion();
   }
 
   void _changeQuestion() {
@@ -91,5 +89,9 @@ class OzisanPageNotifier extends StateNotifier<OzisanPageState> {
     }
 
     state = state.copyWith(question: questions[index + 1]);
+  }
+
+  void onFinishedAnimation() {
+    state = state.copyWith(animationType: AnimationType.stop);
   }
 }

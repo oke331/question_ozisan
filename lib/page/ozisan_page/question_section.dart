@@ -14,9 +14,11 @@ class OzisanQuestionSection extends HookConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            'Q: ${question.questionText}',
-            style: Theme.of(context).textTheme.headlineSmall,
+          FittedBox(
+            child: Text(
+              'Q: ${question.questionText}',
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
           ),
           const SizedBox(height: 12),
           ...[question.answer1, question.answer2].map(
@@ -47,7 +49,10 @@ class _AnswerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
-      child: Text(text),
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+      ),
     );
   }
 }

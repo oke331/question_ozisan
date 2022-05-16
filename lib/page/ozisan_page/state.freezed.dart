@@ -144,7 +144,7 @@ class _$_OzisanPageState implements _OzisanPageState {
   const _$_OzisanPageState(
       {this.question = dinnerQuestion,
       this.ozisanType = OzisanType.slim,
-      this.animationType = AnimationType.none,
+      this.animationType = AnimationType.stop,
       this.errorMessage = ''});
 
   @override
