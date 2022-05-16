@@ -19,6 +19,7 @@ mixin _$OzisanPageState {
   Question get question => throw _privateConstructorUsedError;
   OzisanType get ozisanType => throw _privateConstructorUsedError;
   AnimationType get animationType => throw _privateConstructorUsedError;
+  dynamic get errorMessage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $OzisanPageStateCopyWith<OzisanPageState> get copyWith =>
@@ -31,7 +32,10 @@ abstract class $OzisanPageStateCopyWith<$Res> {
           OzisanPageState value, $Res Function(OzisanPageState) then) =
       _$OzisanPageStateCopyWithImpl<$Res>;
   $Res call(
-      {Question question, OzisanType ozisanType, AnimationType animationType});
+      {Question question,
+      OzisanType ozisanType,
+      AnimationType animationType,
+      dynamic errorMessage});
 
   $QuestionCopyWith<$Res> get question;
 }
@@ -50,6 +54,7 @@ class _$OzisanPageStateCopyWithImpl<$Res>
     Object? question = freezed,
     Object? ozisanType = freezed,
     Object? animationType = freezed,
+    Object? errorMessage = freezed,
   }) {
     return _then(_value.copyWith(
       question: question == freezed
@@ -64,6 +69,10 @@ class _$OzisanPageStateCopyWithImpl<$Res>
           ? _value.animationType
           : animationType // ignore: cast_nullable_to_non_nullable
               as AnimationType,
+      errorMessage: errorMessage == freezed
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 
@@ -83,7 +92,10 @@ abstract class _$$_OzisanPageStateCopyWith<$Res>
       __$$_OzisanPageStateCopyWithImpl<$Res>;
   @override
   $Res call(
-      {Question question, OzisanType ozisanType, AnimationType animationType});
+      {Question question,
+      OzisanType ozisanType,
+      AnimationType animationType,
+      dynamic errorMessage});
 
   @override
   $QuestionCopyWith<$Res> get question;
@@ -105,6 +117,7 @@ class __$$_OzisanPageStateCopyWithImpl<$Res>
     Object? question = freezed,
     Object? ozisanType = freezed,
     Object? animationType = freezed,
+    Object? errorMessage = freezed,
   }) {
     return _then(_$_OzisanPageState(
       question: question == freezed
@@ -119,6 +132,8 @@ class __$$_OzisanPageStateCopyWithImpl<$Res>
           ? _value.animationType
           : animationType // ignore: cast_nullable_to_non_nullable
               as AnimationType,
+      errorMessage:
+          errorMessage == freezed ? _value.errorMessage : errorMessage,
     ));
   }
 }
@@ -129,7 +144,8 @@ class _$_OzisanPageState implements _OzisanPageState {
   const _$_OzisanPageState(
       {this.question = dinnerQuestion,
       this.ozisanType = OzisanType.slim,
-      this.animationType = AnimationType.none});
+      this.animationType = AnimationType.none,
+      this.errorMessage = ''});
 
   @override
   @JsonKey()
@@ -140,10 +156,13 @@ class _$_OzisanPageState implements _OzisanPageState {
   @override
   @JsonKey()
   final AnimationType animationType;
+  @override
+  @JsonKey()
+  final dynamic errorMessage;
 
   @override
   String toString() {
-    return 'OzisanPageState(question: $question, ozisanType: $ozisanType, animationType: $animationType)';
+    return 'OzisanPageState(question: $question, ozisanType: $ozisanType, animationType: $animationType, errorMessage: $errorMessage)';
   }
 
   @override
@@ -155,7 +174,9 @@ class _$_OzisanPageState implements _OzisanPageState {
             const DeepCollectionEquality()
                 .equals(other.ozisanType, ozisanType) &&
             const DeepCollectionEquality()
-                .equals(other.animationType, animationType));
+                .equals(other.animationType, animationType) &&
+            const DeepCollectionEquality()
+                .equals(other.errorMessage, errorMessage));
   }
 
   @override
@@ -163,7 +184,8 @@ class _$_OzisanPageState implements _OzisanPageState {
       runtimeType,
       const DeepCollectionEquality().hash(question),
       const DeepCollectionEquality().hash(ozisanType),
-      const DeepCollectionEquality().hash(animationType));
+      const DeepCollectionEquality().hash(animationType),
+      const DeepCollectionEquality().hash(errorMessage));
 
   @JsonKey(ignore: true)
   @override
@@ -175,7 +197,8 @@ abstract class _OzisanPageState implements OzisanPageState {
   const factory _OzisanPageState(
       {final Question question,
       final OzisanType ozisanType,
-      final AnimationType animationType}) = _$_OzisanPageState;
+      final AnimationType animationType,
+      final dynamic errorMessage}) = _$_OzisanPageState;
 
   @override
   Question get question => throw _privateConstructorUsedError;
@@ -183,6 +206,8 @@ abstract class _OzisanPageState implements OzisanPageState {
   OzisanType get ozisanType => throw _privateConstructorUsedError;
   @override
   AnimationType get animationType => throw _privateConstructorUsedError;
+  @override
+  dynamic get errorMessage => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_OzisanPageStateCopyWith<_$_OzisanPageState> get copyWith =>

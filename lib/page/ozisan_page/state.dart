@@ -6,7 +6,6 @@ import 'package:question_ozisan/gen/assets.gen.dart';
 import 'package:question_ozisan/main.dart';
 import 'package:question_ozisan/model/answer.dart';
 import 'package:question_ozisan/model/question.dart';
-import 'package:question_ozisan/page/util/custom_snack_bar.dart';
 import 'package:question_ozisan/util/constant_questions.dart';
 
 part 'state.freezed.dart';
@@ -31,6 +30,7 @@ class OzisanPageState with _$OzisanPageState {
     @Default(dinnerQuestion) Question question,
     @Default(OzisanType.slim) OzisanType ozisanType,
     @Default(AnimationType.none) AnimationType animationType,
+    @Default('') errorMessage,
   }) = _OzisanPageState;
 }
 
@@ -74,9 +74,8 @@ class OzisanPageNotifier extends StateNotifier<OzisanPageState> {
           break;
       }
     } on Exception catch (e) {
-      showCustomSnackBar(
-        context: _navigatorKey.currentContext!,
-        msg: '音声の再生に失敗しました。\nError: ${e.toString()}',
+      state = state.copyWith(
+        errorMessage: '音声の再生に失敗しました。\nError: ${e.toString()}',
       );
     }
   }
