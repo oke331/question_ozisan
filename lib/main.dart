@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:question_ozisan/page/ozisan_page/page.dart';
 
-final navigatorKeyProvider = Provider((_) => GlobalKey<NavigatorState>());
-
 void main() {
   runApp(
     const ProviderScope(
@@ -17,13 +15,11 @@ class MyApp extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final navigatorKey = ref.watch(navigatorKeyProvider);
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: const OzisanPage(),
-      navigatorKey: navigatorKey,
       builder: (context, child) {
         final mediaQueryData = MediaQuery.of(context);
         final constrainedTextScaleFactor =

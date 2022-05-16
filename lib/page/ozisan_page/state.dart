@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:question_ozisan/api/audio_player_api.dart';
 import 'package:question_ozisan/gen/assets.gen.dart';
-import 'package:question_ozisan/main.dart';
 import 'package:question_ozisan/model/answer.dart';
 import 'package:question_ozisan/model/question.dart';
 import 'package:question_ozisan/util/constant_questions.dart';
@@ -12,10 +10,7 @@ part 'state.freezed.dart';
 
 final ozisanPageStateProvider =
     StateNotifierProvider<OzisanPageNotifier, OzisanPageState>(
-  (ref) => OzisanPageNotifier._(
-    ref.watch(audioPlayerApiProvider),
-    ref.watch(navigatorKeyProvider),
-  ),
+  (ref) => OzisanPageNotifier._(ref.watch(audioPlayerApiProvider)),
 );
 
 enum AnimationType {
@@ -37,11 +32,9 @@ class OzisanPageState with _$OzisanPageState {
 class OzisanPageNotifier extends StateNotifier<OzisanPageState> {
   OzisanPageNotifier._(
     this._audioPlayerApi,
-    this._navigatorKey,
   ) : super(const OzisanPageState());
 
   final AudioPlayerApi _audioPlayerApi;
-  final GlobalKey<NavigatorState> _navigatorKey;
 
   Future<void> onSelectedAnswer({required Answer answer}) async {
     final ozisanType = answer.ozisanType;
