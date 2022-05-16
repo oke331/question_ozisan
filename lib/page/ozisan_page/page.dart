@@ -19,6 +19,7 @@ class OzisanPage extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('たけおじさん(40)の体型'),
+        centerTitle: true,
       ),
       body: const OzisanBody(),
     );
