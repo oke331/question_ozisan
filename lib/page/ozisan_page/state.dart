@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:question_ozisan/api/audio_player_api.dart';
+import 'package:question_ozisan/gen/assets.gen.dart';
 import 'package:question_ozisan/main.dart';
 import 'package:question_ozisan/model/answer.dart';
 import 'package:question_ozisan/model/question.dart';
 import 'package:question_ozisan/page/util/custom_snack_bar.dart';
-import 'package:question_ozisan/util/constant_assets.dart';
 import 'package:question_ozisan/util/constant_questions.dart';
 
 part 'state.freezed.dart';
@@ -66,11 +66,11 @@ class OzisanPageNotifier extends StateNotifier<OzisanPageState> {
       switch (ozisanType) {
         case OzisanType.slim:
           // ignore: unawaited_futures
-          _audioPlayerApi.play(fileName: soundSlim);
+          _audioPlayerApi.play(fileName: Assets.sound.slimSe);
           break;
         case OzisanType.fat:
           // ignore: unawaited_futures
-          _audioPlayerApi.play(fileName: soundFat);
+          _audioPlayerApi.play(fileName: Assets.sound.fatSe);
           break;
       }
     } on Exception catch (e) {
