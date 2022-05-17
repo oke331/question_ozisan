@@ -10,11 +10,16 @@ class OzisanPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen<String>(
-      ozisanPageStateProvider.select((value) => value.errorMessage),
-      (_, next) => showCustomSnackBar(
-        context: context,
-        msg: next,
-      ),
+      ozisanPageStateProvider.select((value) => value.audioErrorMessage),
+      (_, next) {
+        if (next.isEmpty) {
+          return;
+        }
+        showCustomSnackBar(
+          context: context,
+          msg: next,
+        );
+      },
     );
     return Scaffold(
       appBar: AppBar(

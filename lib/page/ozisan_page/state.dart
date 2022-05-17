@@ -25,7 +25,7 @@ class OzisanPageState with _$OzisanPageState {
     @Default(dinnerQuestion) Question question,
     @Default(OzisanType.fat) OzisanType ozisanType,
     @Default(AnimationType.stop) AnimationType animationType,
-    @Default('') errorMessage,
+    @Default('') audioErrorMessage,
   }) = _OzisanPageState;
 }
 
@@ -63,7 +63,7 @@ class OzisanPageNotifier extends StateNotifier<OzisanPageState> {
       }
     } catch (e) {
       state = state.copyWith(
-        errorMessage: '音声の再生に失敗しました。\nError: ${e.toString()}',
+        audioErrorMessage: '音声の再生に失敗しました。\nError: ${e.toString()}',
       );
     }
   }
@@ -84,5 +84,9 @@ class OzisanPageNotifier extends StateNotifier<OzisanPageState> {
 
   void onFinishedAnimation() {
     state = state.copyWith(animationType: AnimationType.stop);
+  }
+
+  void resetAudioErrorMessage() {
+    state = state.copyWith(audioErrorMessage: '');
   }
 }
