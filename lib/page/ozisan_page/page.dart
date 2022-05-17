@@ -9,6 +9,7 @@ class OzisanPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.watch(ozisanPageStateProvider.notifier);
     ref.listen<String>(
       ozisanPageStateProvider.select((value) => value.audioErrorMessage),
       (_, next) {
@@ -19,6 +20,7 @@ class OzisanPage extends HookConsumerWidget {
           context: context,
           msg: next,
         );
+        notifier.resetAudioErrorMessage();
       },
     );
     return Scaffold(
