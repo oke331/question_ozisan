@@ -16,8 +16,7 @@ final ozisanPageStateProvider =
 
 enum AnimationType {
   stop,
-  slim,
-  fat,
+  play,
 }
 
 @freezed
@@ -39,21 +38,13 @@ class OzisanPageNotifier extends StateNotifier<OzisanPageState> {
 
   Future<void> onSelectedAnswer({required Answer answer}) async {
     final ozisanType = answer.ozisanType;
-    state = state.copyWith(ozisanType: ozisanType);
-    _changeAnimationType(ozisanType: ozisanType);
+
+    state = state.copyWith(
+      ozisanType: ozisanType,
+      animationType: AnimationType.play,
+    );
     _changeQuestion();
     await _playSound(ozisanType: ozisanType);
-  }
-
-  void _changeAnimationType({required OzisanType ozisanType}) {
-    switch (ozisanType) {
-      case OzisanType.slim:
-        state = state.copyWith(animationType: AnimationType.slim);
-        break;
-      case OzisanType.fat:
-        state = state.copyWith(animationType: AnimationType.fat);
-        break;
-    }
   }
 
   Future<void> _playSound({required OzisanType ozisanType}) async {

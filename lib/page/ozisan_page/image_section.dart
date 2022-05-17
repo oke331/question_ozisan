@@ -22,9 +22,7 @@ class OzisanImageSection extends HookConsumerWidget {
       lowerBound: 0.5,
       duration: animationDuration,
     );
-
-    // AnimationTypeがストップでない時のみアニメーションを走らせる
-    if (animationType != AnimationType.stop) {
+    if (animationType == AnimationType.play) {
       rotateAnimationController.reset();
       rotateAnimationController.forward().then((value) {
         rotateAnimationController.reset();
@@ -45,17 +43,18 @@ class OzisanImageSection extends HookConsumerWidget {
           sizeAnimationController,
         ]),
         builder: (context, child) {
-          if (animationType == AnimationType.stop) {
-            return Image.asset(ozisanType.asset);
+          switch (animationType) {
+            case AnimationType.stop:
+              return Image.asset(ozisanType.asset);
+            case AnimationType.play:
+              return Transform.scale(
+                scale: sizeAnimationController.value,
+                child: Transform.rotate(
+                  angle: sin(rotateAnimationController.value * pi * 2) / 3,
+                  child: Image.asset(ozisanType.asset),
+                ),
+              );
           }
-
-          return Transform.scale(
-            scale: sizeAnimationController.value,
-            child: Transform.rotate(
-              angle: sin(rotateAnimationController.value * pi * 2) / 3,
-              child: Image.asset(ozisanType.asset),
-            ),
-          );
         },
       ),
     );
