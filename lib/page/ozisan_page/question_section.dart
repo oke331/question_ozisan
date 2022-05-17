@@ -9,6 +9,17 @@ class OzisanQuestionSection extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final question = ref.watch(ozisanPageStateProvider).question;
     final notifier = ref.watch(ozisanPageStateProvider.notifier);
+    final answerButtonList = [question.answer1, question.answer2]
+        .map(
+          (answer) => _AnswerButton(
+            key: ValueKey(answer.text),
+            text: answer.text,
+            onPressed: () {
+              notifier.onSelectedAnswer(answer: answer);
+            },
+          ),
+        )
+        .toList();
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -21,15 +32,12 @@ class OzisanQuestionSection extends HookConsumerWidget {
             ),
           ),
           const SizedBox(height: 12),
-          ...[question.answer1, question.answer2].map(
-            (answer) => _AnswerButton(
-              key: ValueKey(answer.text),
-              text: answer.text,
-              onPressed: () {
-                notifier.onSelectedAnswer(answer: answer);
-              },
-            ),
-          ),
+          ListView.separated(
+            shrinkWrap: true,
+            itemBuilder: ((_, index) => answerButtonList[index]),
+            separatorBuilder: (context, index) => const SizedBox(height: 4),
+            itemCount: answerButtonList.length,
+          )
         ],
       ),
     );
