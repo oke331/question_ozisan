@@ -23,7 +23,7 @@ enum AnimationType {
 class OzisanPageState with _$OzisanPageState {
   const factory OzisanPageState({
     @Default(dinnerQuestion) Question question,
-    @Default(OzisanType.slim) OzisanType ozisanType,
+    @Default(OzisanType.fat) OzisanType ozisanType,
     @Default(AnimationType.stop) AnimationType animationType,
     @Default('') errorMessage,
   }) = _OzisanPageState;
