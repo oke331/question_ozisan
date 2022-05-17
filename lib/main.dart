@@ -21,18 +21,6 @@ class MyApp extends HookConsumerWidget {
         useMaterial3: true,
       ),
       home: const OzisanPage(),
-      builder: (context, child) {
-        final mediaQueryData = MediaQuery.of(context);
-        final constrainedTextScaleFactor =
-            mediaQueryData.textScaleFactor.clamp(1.0, 1.5);
-
-        return MediaQuery(
-          data: mediaQueryData.copyWith(
-            textScaleFactor: constrainedTextScaleFactor,
-          ),
-          child: child!,
-        );
-      },
     );
   }
 }
