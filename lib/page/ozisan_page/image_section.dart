@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:question_ozisan/model/answer.dart';
 import 'package:question_ozisan/page/ozisan_page/state.dart';
 
 class OzisanImageSection extends HookConsumerWidget {
@@ -47,13 +48,24 @@ class OzisanImageSection extends HookConsumerWidget {
             case AnimationType.stop:
               return Image.asset(ozisanType.asset);
             case AnimationType.play:
-              return Transform.scale(
-                scale: sizeAnimationController.value,
-                child: Transform.rotate(
-                  angle: sin(rotateAnimationController.value * pi * 2) / 3,
-                  child: Image.asset(ozisanType.asset),
-                ),
-              );
+              switch (ozisanType) {
+                case OzisanType.slim:
+                  return Transform.scale(
+                    scale: sizeAnimationController.value,
+                    child: Transform.rotate(
+                      angle: 2 * pi * rotateAnimationController.value,
+                      child: Image.asset(ozisanType.asset),
+                    ),
+                  );
+                case OzisanType.fat:
+                  return Transform.scale(
+                    scale: sizeAnimationController.value,
+                    child: Transform.rotate(
+                      angle: sin(rotateAnimationController.value * pi * 2) / 3,
+                      child: Image.asset(ozisanType.asset),
+                    ),
+                  );
+              }
           }
         },
       ),
