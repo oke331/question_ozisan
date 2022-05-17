@@ -23,6 +23,7 @@ class OzisanQuestionSection extends HookConsumerWidget {
           const SizedBox(height: 12),
           ...[question.answer1, question.answer2].map(
             (answer) => _AnswerButton(
+              key: ValueKey(answer.text),
               text: answer.text,
               onPressed: () {
                 notifier.onSelectedAnswer(answer: answer);
